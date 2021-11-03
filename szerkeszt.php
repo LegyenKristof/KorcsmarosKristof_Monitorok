@@ -13,9 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $ar = $_POST["ar"] ?? "";
     $gyartasideje = $_POST["gyartasideje"] ?? new DateTime();
 
-    //if ($nev != "" && $gyarto != "" && $kepfrissites != "" && $ar != ""){
+    if ($nev != "" && $gyarto != "" && $kepfrissites != "" && $ar != ""){
+        Monitor::szerkeszt(new Monitor($nev, $gyarto, $kepfrissites, $ar, new DateTime($gyartasideje)), $id);
         header("Location: index.php");
-    //}      
+    }      
 }
 
 ?>
@@ -45,12 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
     </div>
     <div>
         <span>Gyártva: </span><input type="date" name="gyartasideje" value="<?php echo $monitor -> getGyartasideje() -> format("Y-m-d") ?>">
-    </div>    
+    </div> 
+    <div>
+        <span></span><input type="submit" value="Szerkesztés">        
+    </div>   
 </form>
-<div>
-    <span></span><form method="POST" class='formButton'><input type="submit" value="Szerkesztés"></form>
-    <a href="index.php"><button>Mégse</button></a>
-</div>
-    
+
 </body>
 </html>

@@ -86,7 +86,7 @@ class Monitor{
             ->execute([":id" => $id]);
     }
 
-    public function szerkeszt(){
+    public static function szerkeszt(Monitor $monitor, int $id){
         global $db;
 
         $db -> prepare("UPDATE monitorok SET nev = :nev, gyarto = :gyarto, kepfrissites = :kepfrissites, ar = :ar, gyartasideje = :gyartasideje
