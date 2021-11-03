@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init(){
-    document.getElementById("hozzaad").addEventListener("click", hozzaad)
+    document.getElementById("szerkesztes").addEventListener("click", szerkesztes)
 }
 
-function hozzaad(e){
+function szerkesztes(e){
     if (
         document.getElementById("nev").value.trim() == "" ||
         document.getElementById("gyarto").value.trim() == "" ||
