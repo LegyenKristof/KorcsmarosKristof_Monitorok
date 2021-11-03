@@ -39,16 +39,16 @@ $monitorok = Monitor::beolvas();
 
 <form method="POST">
     <div>
-        <span>Név: </span><input type="text" name="nev">
+        <span>Név: </span><input type="text" name="nev" required>
     </div>
     <div>
-        <span>Gyártó: </span><input type="text" name="gyarto">
+        <span>Gyártó: </span><input type="text" name="gyarto" required>
     </div>
     <div>
-        <span>Képfrissítési frekvencia: </span><input type="number" name="kepfrissites">
+        <span>Képfrissítési frekvencia: </span><input type="number" name="kepfrissites" required>
     </div>
     <div>
-        <span>Ár: </span><input type="number" name="ar">
+        <span>Ár: </span><input type="number" name="ar" required>
     </div>
     <div>
         <span>Gyártva: </span><input type="date" name="gyartasideje">

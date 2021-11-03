@@ -33,16 +33,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
 
 <form method="POST">
     <div>
-        <span>Név: </span><input type="text" name="nev" value="<?php echo $monitor -> getNev() ?>">
+        <span>Név: </span><input type="text" name="nev" value="<?php echo $monitor -> getNev() ?>" required>
     </div>
     <div>
-        <span>Gyártó: </span><input type="text" name="gyarto" value="<?php echo $monitor -> getGyarto() ?>">
+        <span>Gyártó: </span><input type="text" name="gyarto" value="<?php echo $monitor -> getGyarto() ?>" required>
     </div>
     <div>
-        <span>Képfrissítési frekvencia: </span><input type="number" name="kepfrissites" value="<?php echo $monitor -> getKepfrissites() ?>">
+        <span>Képfrissítési frekvencia: </span><input type="number" name="kepfrissites" value="<?php echo $monitor -> getKepfrissites() ?>" required>
     </div>
     <div>
-        <span>Ár: </span><input type="number" name="ar" value="<?php echo $monitor -> getAr() ?>">
+        <span>Ár: </span><input type="number" name="ar" value="<?php echo $monitor -> getAr() ?>" required>
     </div>
     <div>
         <span>Gyártva: </span><input type="date" name="gyartasideje" value="<?php echo $monitor -> getGyartasideje() -> format("Y-m-d") ?>">
