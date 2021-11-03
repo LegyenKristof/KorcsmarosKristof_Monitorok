@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $ar = $_POST["ar"] ?? "";
     $gyartasideje = $_POST["gyartasideje"] ?? new DateTime();
 
-    if ($nev != "" && $gyarto != "" && $kepfrissites != "" && $ar != ""){
+    if (trim($nev) != "" && trim($gyarto) != "" && $kepfrissites != "" && $ar != ""){
         Monitor::szerkeszt(new Monitor($nev, $gyarto, $kepfrissites, $ar, new DateTime($gyartasideje)), $id);
         header("Location: index.php");
     }      
@@ -28,27 +28,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="main.css">
+    <script src="szerkeszt.js"></script>
 </head>
 <body>
 
 <form method="POST">
     <div>
-        <span>Név: </span><input type="text" name="nev" value="<?php echo $monitor -> getNev() ?>" required>
+        <span>Név: </span><input type="text" name="nev" id="nev" value="<?php echo $monitor -> getNev() ?>" required>
     </div>
     <div>
-        <span>Gyártó: </span><input type="text" name="gyarto" value="<?php echo $monitor -> getGyarto() ?>" required>
+        <span>Gyártó: </span><input type="text" name="gyarto" id="gyarto" value="<?php echo $monitor -> getGyarto() ?>" required>
     </div>
     <div>
-        <span>Képfrissítési frekvencia: </span><input type="number" name="kepfrissites" value="<?php echo $monitor -> getKepfrissites() ?>" required>
+        <span>Képfrissítési frekvencia: </span><input type="number" name="kepfrissites" id="kepfrissites" value="<?php echo $monitor -> getKepfrissites() ?>" required>
     </div>
     <div>
-        <span>Ár: </span><input type="number" name="ar" value="<?php echo $monitor -> getAr() ?>" required>
+        <span>Ár: </span><input type="number" name="ar" id="ar" value="<?php echo $monitor -> getAr() ?>" required>
     </div>
     <div>
         <span>Gyártva: </span><input type="date" name="gyartasideje" value="<?php echo $monitor -> getGyartasideje() -> format("Y-m-d") ?>">
     </div> 
     <div>
-        <span></span><input type="submit" value="Szerkesztés">        
+        <span></span><input type="submit" value="Szerkesztés" id="szerkesztes">        
     </div>   
 </form>
 

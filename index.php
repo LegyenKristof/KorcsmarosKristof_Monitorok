@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
         $ar = $_POST["ar"] ?? "";
         $gyartasideje = $_POST["gyartasideje"] ?? new DateTime();
 
-        if ($nev != "" && $gyarto != "" && $kepfrissites != "" && $ar != ""){
+        if (trim($nev) != "" && trim($gyarto) != "" && $kepfrissites != "" && $ar != ""){
             Monitor::mentes(new Monitor($nev, $gyarto, $kepfrissites, $ar, new DateTime($gyartasideje)));
         }
     }
@@ -39,22 +39,22 @@ $monitorok = Monitor::beolvas();
 
 <form method="POST">
     <div>
-        <span>Név: </span><input type="text" name="nev" required>
+        <span>Név: </span><input type="text" name="nev" id="nev" required>
     </div>
     <div>
-        <span>Gyártó: </span><input type="text" name="gyarto" required>
+        <span>Gyártó: </span><input type="text" name="gyarto" id="gyarto" required>
     </div>
     <div>
-        <span>Képfrissítési frekvencia: </span><input type="number" name="kepfrissites" required>
+        <span>Képfrissítési frekvencia: </span><input type="number" name="kepfrissites" id="kepfrissites" required>
     </div>
     <div>
-        <span>Ár: </span><input type="number" name="ar" required>
+        <span>Ár: </span><input type="number" name="ar" id="ar" required>
     </div>
     <div>
         <span>Gyártva: </span><input type="date" name="gyartasideje">
     </div>
     <div>
-        <span></span><input type="submit" value="Hozzáadás">
+        <span></span><input type="submit" value="Hozzáadás" id="hozzaad">
     </div>
 </form>
     
