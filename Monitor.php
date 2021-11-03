@@ -18,13 +18,13 @@ class Monitor{
         $this -> ar = $ar;
         $this -> gyartasideje = $gyartasideje;
     }
-
+    
     public function getId() : int {
         return $this->id;
     }
 
     public function getNev() : string {
-        return $this->id;
+        return $this->nev;
     }
 
     public function getGyarto() : string {
@@ -42,5 +42,28 @@ class Monitor{
     public function getGyartasideje() : DateTime {
         return $this->gyartasideje;
     }
+
+    public static function beolvas() : array {
+        global $db;
+
+        $t = $db->query("SELECT * FROM monitorok")
+            ->fetchAll();
+        $eredmeny = [];
+
+        foreach ($t as $elem){
+            $monitor = new Monitor(
+                $elem["nev"],
+                $elem["gyarto"],
+                $elem["kepfrissites"],
+                $elem["ar"],
+                new DateTime($elem["gyartasideje"])
+            );
+            $monitor -> id = $elem["id"];
+            $eredmeny[] = $monitor;
+        }
+
+        return $eredmeny;
+    }
+
 
 }
