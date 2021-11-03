@@ -5,8 +5,12 @@ span{
     margin-right: 10px;
 }
 
-form div{
+div{
     margin: 10px;
+}
+
+.formButton{
+    display: inline-block;
 }
 
 ul{
@@ -14,5 +18,5 @@ ul{
 }
 
 li{
-    margin: 10px;
+    margin: 20px;
 }

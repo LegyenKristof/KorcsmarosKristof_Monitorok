@@ -3,15 +3,23 @@
 require_once "Monitor.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
-    $nev = $_POST["nev"] ?? "";
-    $gyarto = $_POST["gyarto"] ?? "";
-    $kepfrissites = $_POST["kepfrissites"] ?? "";
-    $ar = $_POST["ar"] ?? "";
-    $gyartasideje = $_POST["gyartasideje"] ?? new DateTime();
+    $torlesId = $_POST["torles"] ?? "";
 
-    if ($nev != "" && $gyarto != "" && $kepfrissites != "" && $ar != ""){
-        Monitor::mentes(new Monitor($nev, $gyarto, $kepfrissites, $ar, new DateTime($gyartasideje)));
+    if ($torlesId != ""){        
+        Monitor::torles($torlesId);
     }
+    else{
+        $nev = $_POST["nev"] ?? "";
+        $gyarto = $_POST["gyarto"] ?? "";
+        $kepfrissites = $_POST["kepfrissites"] ?? "";
+        $ar = $_POST["ar"] ?? "";
+        $gyartasideje = $_POST["gyartasideje"] ?? new DateTime();
+
+        if ($nev != "" && $gyarto != "" && $kepfrissites != "" && $ar != ""){
+            Monitor::mentes(new Monitor($nev, $gyarto, $kepfrissites, $ar, new DateTime($gyartasideje)));
+        }
+    }
+    
 }
 
 $monitorok = Monitor::beolvas();
@@ -25,30 +33,29 @@ $monitorok = Monitor::beolvas();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="main.css">
+    <script src="main.js"></script>
 </head>
 <body>
 
 <form method="POST">
-
-<div>
-    <span>Név: </span><input type="text" name="nev">
-</div>
-<div>
-    <span>Gyártó: </span><input type="text" name="gyarto">
-</div>
-<div>
-    <span>Képfrissítési frekvencia: </span><input type="number" name="kepfrissites">
-</div>
-<div>
-    <span>Ár: </span><input type="number" name="ar">
-</div>
-<div>
-    <span>Gyártva: </span><input type="date" name="gyartasideje">
-</div>
-<div>
-    <span></span><input type="submit" value="Hozzáadás">
-</div>
-
+    <div>
+        <span>Név: </span><input type="text" name="nev">
+    </div>
+    <div>
+        <span>Gyártó: </span><input type="text" name="gyarto">
+    </div>
+    <div>
+        <span>Képfrissítési frekvencia: </span><input type="number" name="kepfrissites">
+    </div>
+    <div>
+        <span>Ár: </span><input type="number" name="ar">
+    </div>
+    <div>
+        <span>Gyártva: </span><input type="date" name="gyartasideje">
+    </div>
+    <div>
+        <span></span><input type="submit" value="Hozzáadás">
+    </div>
 </form>
     
 <ul>
@@ -62,6 +69,8 @@ foreach($monitorok as $monitor){
     echo "Képfrissítési frekvencia: " . $monitor -> getKepfrissites() . "<br>";
     echo "Ár: " . $monitor -> getAr() . "<br>";
     echo "Gyártva: " . $monitor -> getGyartasideje() -> format("Y-m-d") . "<br>";
+    echo "<form method='POST' class='formButton'><button name='torles' value='" . $monitor -> getId() . "'>Törlés</button></form>";
+    echo "<a href='szerkeszt.php?id=" . $monitor -> getId() . "'><button>Szerkesztés</button></a>";
     echo "</li>";
 }
 

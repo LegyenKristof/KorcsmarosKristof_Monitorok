@@ -79,5 +79,48 @@ class Monitor{
             ]);
     }
 
+    public static function torles(int $id){
+        global $db;
+
+        $db -> prepare("DELETE FROM monitorok WHERE id LIKE :id")
+            ->execute([":id" => $id]);
+    }
+
+    public function szerkeszt(){
+        global $db;
+
+        $db -> prepare("UPDATE monitorok SET nev = :nev, gyarto = :gyarto, kepfrissites = :kepfrissites, ar = :ar, gyartasideje = :gyartasideje
+        WHERE id = :id")
+            ->execute([
+                ":nev" => $monitor -> getNev(),
+                ":gyarto" => $monitor -> getGyarto(),
+                ":kepfrissites" => $monitor -> getKepfrissites(),
+                ":ar" => $monitor -> getAr(),
+                ":gyartasideje" => $monitor -> getGyartasideje() -> format("Y-m-d"),
+                ":id" => $id
+            ]);
+    }
+
+    public static function getMonitorById(int $id) : Monitor{
+        global $db;
+
+        $stmt = $db->prepare('SELECT * FROM monitorok WHERE id = :id');
+        $stmt->execute([':id' => $id]);
+        $eredmeny = $stmt->fetchAll();
+
+        if (count($eredmeny) !== 1) {
+            throw new Exception('A DB lekerdezes nem egy sort adott vissza');
+        }
+
+        $monitor = new monitor(
+            $eredmeny[0]['nev'],
+            $eredmeny[0]['gyarto'],
+            $eredmeny[0]['kepfrissites'],
+            $eredmeny[0]['ar'],
+            new DateTime($eredmeny[0]['gyartasideje'])
+        );
+        $monitor->id = $eredmeny[0]['id'];
+        return $monitor;
+    }
 
 }
