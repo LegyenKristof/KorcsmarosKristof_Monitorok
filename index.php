@@ -2,6 +2,18 @@
 
 require_once "Monitor.php";
 
+if ($_SERVER["REQUEST_METHOD"] === "POST"){
+    $nev = $_POST["nev"] ?? "";
+    $gyarto = $_POST["gyarto"] ?? "";
+    $kepfrissites = $_POST["kepfrissites"] ?? "";
+    $ar = $_POST["ar"] ?? "";
+    $gyartasideje = $_POST["gyartasideje"] ?? new DateTime();
+
+    if ($nev != "" && $gyarto != "" && $kepfrissites != "" && $ar != ""){
+        Monitor::mentes(new Monitor($nev, $gyarto, $kepfrissites, $ar, new DateTime($gyartasideje)));
+    }
+}
+
 $monitorok = Monitor::beolvas();
 
 ?>

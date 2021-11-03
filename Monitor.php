@@ -65,5 +65,19 @@ class Monitor{
         return $eredmeny;
     }
 
+    public static function mentes(Monitor $monitor){
+        global $db;
+
+        $db -> prepare("INSERT INTO monitorok (nev, gyarto, kepfrissites, ar, gyartasideje) 
+            VALUES (:nev, :gyarto, :kepfrissites, :ar, :gyartasideje)")
+            ->execute([
+                ":nev" => $monitor -> getNev(),
+                ":gyarto" => $monitor -> getGyarto(),
+                ":kepfrissites" => $monitor -> getKepfrissites(),
+                ":ar" => $monitor -> getAr(),
+                ":gyartasideje" => $monitor -> getGyartasideje() -> format("Y-m-d")
+            ]);
+    }
+
 
 }
