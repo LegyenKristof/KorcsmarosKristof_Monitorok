@@ -1,22 +1,4 @@
-span{
-    width: 200px;
-    text-align: right;
-    display: inline-block;
-    margin-right: 10px;
-}
-
-div{
-    margin: 10px;
-}
-
-.formButton{
-    display: inline-block;
-}
-
-ul{
-    list-style-type: none;
-}
-
-li{
-    margin: 20px;
+body{
+    background-size: cover;
+    background-repeat: no-repeat;
 }
